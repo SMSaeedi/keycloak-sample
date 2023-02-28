@@ -5,10 +5,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.qrebl.users.dto.AuthDto;
-import com.qrebl.users.dto.JwtDto;
-import com.qrebl.users.dto.LoginDto;
-import com.qrebl.users.dto.UserDto;
+import com.qrebl.users.dto.*;
 import com.qrebl.users.config.Credentials;
 import com.qrebl.users.config.KeycloakConfig;
 import lombok.AllArgsConstructor;
@@ -36,7 +33,7 @@ public class KeyCloakService {
     public void init() {
         modelMapper = new ModelMapper();
         objectMapper = new ObjectMapper();
-        objectMapper.configure(JsonParser.Feature.IGNORE_UNDEFINED,true);
+        objectMapper.configure(JsonParser.Feature.IGNORE_UNDEFINED, true);
     }
 
     public void addUser(UserDto userDTO) {
@@ -106,6 +103,7 @@ public class KeyCloakService {
         String decodedString = new String(decodedBytes);
         JwtDto jwtDto = objectMapper.readValue(decodedString, JwtDto.class);
         jwtDto.setAccessToken(jwt.getPayload());
+
         return AuthDto.builder()
                 .accessToken(jwtDto.getAccessToken())
                 .expireTime(String.valueOf(new Date(Long.parseLong(jwtDto.getExpireTime()))))
@@ -130,5 +128,20 @@ public class KeyCloakService {
 
     public UsersResource getInstance() {
         return KeycloakConfig.getInstance().realm(KeycloakConfig.realm).users();
+    }
+
+    public ScopeDto addScope(ScopeDto scopeDto) {
+        Config config = KeycloakConfig.scopeConfig();
+
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        modelMapper.map(scopeDto, config);
+
+        return ScopeDto.builder()
+//                .scopeId(UUID.randomUUID().toString())
+                .name(scopeDto.getName())
+                .protocol(scopeDto.getProtocol())
+                .description(scopeDto.getDescription())
+                .build();
     }
 }

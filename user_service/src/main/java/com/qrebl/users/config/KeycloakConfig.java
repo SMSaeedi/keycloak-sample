@@ -2,40 +2,30 @@ package com.qrebl.users.config;
 
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.keycloak.OAuth2Constants;
 import org.keycloak.admin.client.Config;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.KeycloakBuilder;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.web.reactive.function.BodyInserters;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import javax.annotation.PostConstruct;
-import java.util.Collections;
+import java.util.UUID;
 
 @Configuration
 public class KeycloakConfig {
     static Keycloak keycloak = null;
-    final static String client_id = "admin-panel";
     final static String admin_client_id = "admin-cli";
-    final static String username = "user";
     final static String admin_username = "admin";
     final static String admin_password = "admin";
-    final static String password = "user123";
     final static String grant_type = "password";
     public final static String realm = "user-realm";
     public final static String realm_admin = "master";
-    final static String client_secret = "nOHDjssKScrKtLRgLlxrB2plwnM3ym3A";
+    final static String client_secret = "OkWylyN3SDpI1cTEC6flAJ8KOc1Ox4gE";
     private static ResteasyClient resteasyClient;
-
-    @Value("${keycloak.admin-panel.url}")
-    private static String url="http://192.168.0.136:8180/auth";
+    private static String url = "http://sso-srv:1443/auth";
+    private static String scope_url = "http://sso:1443/auth/admin/realms/roham-soft/client-scopes";
 
     @PostConstruct
-    public void init(){
+    public void init() {
         resteasyClient = getResteasyClient();
     }
 
@@ -75,6 +65,12 @@ public class KeycloakConfig {
     }
 
     public static Config newConfig() {
-        return new Config(url, realm_admin, null, null,admin_client_id, null);
+        return new Config(url, realm_admin, null, null, admin_client_id, null);
+    }
+
+    public static Config scopeConfig() {
+        //add authorization and JWT to header
+        String scopeId = UUID.randomUUID().toString();
+        return new Config(scope_url + "/" + scopeId, null, null, null, null, null);
     }
 }
