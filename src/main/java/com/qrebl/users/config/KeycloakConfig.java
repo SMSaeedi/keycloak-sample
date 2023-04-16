@@ -2,19 +2,12 @@ package com.qrebl.users.config;
 
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.keycloak.OAuth2Constants;
 import org.keycloak.admin.client.Config;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.KeycloakBuilder;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.web.reactive.function.BodyInserters;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import javax.annotation.PostConstruct;
-import java.util.Collections;
 
 @Configuration
 public class KeycloakConfig {
@@ -29,12 +22,12 @@ public class KeycloakConfig {
     public final static String realm = "master";
     public final static String realm_admin = "master";
     final static String client_secret = "01z88W8qRNZFo8UkFtslEn6JUeKjQ0eQ";
-//    final static String client_secret = "EroAp6Ex4qz848LqUYxU5sPtpyQX5iPv";
+    //    final static String client_secret = "EroAp6Ex4qz848LqUYxU5sPtpyQX5iPv";
     private static ResteasyClient resteasyClient;
-    private static String url="http://172.18.1.177:1443/auth";
+    private static String url = "http://172.18.1.177:1443/auth";
 
     @PostConstruct
-    public void init(){
+    public void init() {
         resteasyClient = getResteasyClient();
     }
 
@@ -74,6 +67,6 @@ public class KeycloakConfig {
     }
 
     public static Config newConfig() {
-        return new Config(url, realm_admin, admin_username, password,client_id, client_secret);
+        return new Config(url, realm_admin, admin_username, password, client_id, client_secret);
     }
 }
