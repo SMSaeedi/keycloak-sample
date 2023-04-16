@@ -19,20 +19,19 @@ import java.util.Collections;
 @Configuration
 public class KeycloakConfig {
     static Keycloak keycloak = null;
-    final static String client_id = "admin-panel";
+    final static String client_id = "admin-cli";
     final static String admin_client_id = "admin-cli";
     final static String username = "user";
     final static String admin_username = "admin";
     final static String admin_password = "admin";
-    final static String password = "user123";
+    final static String password = "admin";
     final static String grant_type = "password";
-    public final static String realm = "user-realm";
+    public final static String realm = "master";
     public final static String realm_admin = "master";
-    final static String client_secret = "nOHDjssKScrKtLRgLlxrB2plwnM3ym3A";
+    final static String client_secret = "01z88W8qRNZFo8UkFtslEn6JUeKjQ0eQ";
+//    final static String client_secret = "EroAp6Ex4qz848LqUYxU5sPtpyQX5iPv";
     private static ResteasyClient resteasyClient;
-
-    @Value("${keycloak.admin-panel.url}")
-    private static String url="http://192.168.0.136:8180/auth";
+    private static String url="http://172.18.1.177:1443/auth";
 
     @PostConstruct
     public void init(){
@@ -56,10 +55,10 @@ public class KeycloakConfig {
         if (keycloak == null) {
             keycloak = KeycloakBuilder.builder()
                     .serverUrl(url)
+                    .realm(realm_admin)
                     .grantType(grant_type)
                     .username(admin_username)
-                    .password(admin_password)
-                    .realm(realm_admin)
+                    .password(password)
                     .clientId(admin_client_id)
                     .clientSecret(client_secret)
                     .resteasyClient(resteasyClient)
@@ -75,6 +74,6 @@ public class KeycloakConfig {
     }
 
     public static Config newConfig() {
-        return new Config(url, realm_admin, null, null,admin_client_id, null);
+        return new Config(url, realm_admin, admin_username, password,client_id, client_secret);
     }
 }

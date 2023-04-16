@@ -29,7 +29,7 @@ public class KeyCloakController {
         return user;
     }
 
-    @GetMapping(path = "/get-token")
+    @PostMapping(path = "/get-token")
     public AuthDto getToken(@RequestBody LoginDto loginDto){
         return service.getToken(loginDto);
     }

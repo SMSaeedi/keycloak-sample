@@ -5,12 +5,12 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.qrebl.users.config.Credentials;
+import com.qrebl.users.config.KeycloakConfig;
 import com.qrebl.users.dto.AuthDto;
 import com.qrebl.users.dto.JwtDto;
 import com.qrebl.users.dto.LoginDto;
 import com.qrebl.users.dto.UserDto;
-import com.qrebl.users.config.Credentials;
-import com.qrebl.users.config.KeycloakConfig;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -36,7 +36,7 @@ public class KeyCloakService {
     public void init() {
         modelMapper = new ModelMapper();
         objectMapper = new ObjectMapper();
-        objectMapper.configure(JsonParser.Feature.IGNORE_UNDEFINED,true);
+        objectMapper.configure(JsonParser.Feature.IGNORE_UNDEFINED, true);
     }
 
     public void addUser(UserDto userDTO) {
@@ -53,9 +53,7 @@ public class KeyCloakService {
         user.setUsername(userDTO.getUserName());
         user.setFirstName(userDTO.getFirstname());
         user.setLastName(userDTO.getLastName());
-        user.setEmail(userDTO.getEmailId());
         user.setCredentials(Collections.singletonList(credential));
-        user.setEnabled(true);
 
         UsersResource instance = getInstance();
         instance.create(user);
@@ -129,6 +127,6 @@ public class KeyCloakService {
     }
 
     public UsersResource getInstance() {
-        return KeycloakConfig.getInstance().realm(KeycloakConfig.realm).users();
+        return KeycloakConfig. getInstance().realm(KeycloakConfig.realm).users();
     }
 }
