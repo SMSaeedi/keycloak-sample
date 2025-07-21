@@ -33,7 +33,7 @@
         <dependency>
             <groupId>org.keycloak</groupId>
             <artifactId>keycloak-tomcat-adapter</artifactId>
-            <version>7.0.0</version>
+            <version>24.0.3</version>
         </dependency>
         <dependency>
             <groupId>org.keycloak</groupId>
