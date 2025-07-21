@@ -27,13 +27,13 @@
         <dependency>
             <groupId>org.keycloak</groupId>
             <artifactId>keycloak-spring-security-adapter</artifactId>
-            <version>12.0.3</version>
+            <version>22.0.0</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.keycloak/keycloak-tomcat-adapter -->
         <dependency>
             <groupId>org.keycloak</groupId>
             <artifactId>keycloak-tomcat-adapter</artifactId>
-            <version>7.0.0</version>
+            <version>22.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.keycloak</groupId>
