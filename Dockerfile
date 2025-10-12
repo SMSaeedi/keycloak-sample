@@ -1,5 +1,5 @@
 #FROM  tomcat:9.0.70-jdk11-corretto-al2
-FROM  tomcat:9.0.107
+FROM  tomcat:9.0.110
 USER root
 ARG DEBIAN_FRONTEND=noninteractive
 #RUN apt-get update \
