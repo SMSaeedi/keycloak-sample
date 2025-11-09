@@ -27,13 +27,13 @@
         <dependency>
             <groupId>org.keycloak</groupId>
             <artifactId>keycloak-spring-security-adapter</artifactId>
-            <version>22.0.2</version>
+            <version>22.0.5</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.keycloak/keycloak-tomcat-adapter -->
         <dependency>
             <groupId>org.keycloak</groupId>
             <artifactId>keycloak-tomcat-adapter</artifactId>
-            <version>24.0.3</version>
+            <version>24.0.5</version>
         </dependency>
         <dependency>
             <groupId>org.keycloak</groupId>
@@ -67,12 +67,12 @@
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
-            <version>0.12.6</version>
+            <version>0.13.0</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
-            <version>6.4.9</version>
+            <version>6.5.3</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
