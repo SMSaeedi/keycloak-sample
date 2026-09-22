@@ -9,17 +9,14 @@ server:
 #  ssl-required: none
 #  resource: admin-panel
 #  credentials:
-#    secret: nOHDjssKScrKtLRgLlxrB2plwnM3ym3A
+#  secret: nOHDjssKScrKtLRgLlxrB2plwnM3ym3A
 #  use-resource-role-mappings: true
 #  bearer-only: true
 
 keycloak:
-  realm: master
-  auth-server-url: http://sso-srv:1443/auth/
-  ssl-required: external
-  resource: admin-cli
-  credentials:
-    secret: 01z88W8qRNZFo8UkFtslEn6JUeKjQ0eQ
-  use-resource-role-mappings: true
-  bearer-only: true
-  public-client: true
+  server-url: ${KEYCLOAK_SERVER_URL:http://sso-srv:1443}
+  realm: ${KEYCLOAK_REALM:master}
+  admin-username: ${KEYCLOAK_ADMIN_USERNAME:admin}
+  admin-password: ${KEYCLOAK_ADMIN_PASSWORD:admin}
+  client-id: ${KEYCLOAK_CLIENT_ID:admin-cli}
+  client-secret: ${KEYCLOAK_CLIENT_SECRET:}
